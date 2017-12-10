@@ -3,7 +3,14 @@
 var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
 
 // ROUTES
-weatherApp.config(function($locationProvider, $routeProvider) {
+weatherApp.config(function($locationProvider, $routeProvider, $sceDelegateProvider) {
+
+	$sceDelegateProvider.resourceUrlWhitelist([
+		// Allow same origin resource loads.
+		'self',
+		// Allow loading from our assets domain.  Notice the difference between * and **.
+		'http://api.openweathermap.org/**'
+	]);
 
 	//	$locationProvider.html5Mode({enabled: false, requireBase: false});
 	$locationProvider.hashPrefix('');
@@ -46,14 +53,33 @@ weatherApp.controller('homeController', ['$scope', 'cityService', '$location',
 	}
 ]);
 
-weatherApp.controller('forecastController', ['$scope', 'cityService', '$location',
+weatherApp.controller('forecastController', ['$scope', '$resource', '$sce', 'cityService', '$location',
 	// Needs to be in same order as in brackets, protects against minification
-	function($scope, cityService, $location) {
+	function($scope, $resource, $sce, cityService, $location) {
 		console.info("forecastController");
 		console.info($location.path());
 
 		// Get the value of city from the cityService service
 		$scope.city = cityService.city;
+		var theURL = "http://api.openweathermap.org/data/2.5/forecast/daily";
+
+		// $scope.weatherAPI = $resource(theURL, {
+		// 	callback: "JSON_CALLBACK"
+		// }, {
+		// 	get: {
+		// 		method: "JSONP"
+		// 	}
+		// });
+
+
+		$scope.weatherAPI = $resource(theURL);
+
+		$scope.weatherResult = $scope.weatherAPI.get({
+			zip: $scope.city,
+			cnt: 2,
+			APPID: "cbf71841c266028edf05411b46d61152"
+		});
+		console.log($scope.weatherResult);
 
 	}
 ]);
