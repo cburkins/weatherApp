@@ -69,7 +69,17 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$sce', 'zip
 			APPID: "cbf71841c266028edf05411b46d61152"
 		});
 
+		$scope.convertToFahrenheit = function(degK) {
+			// Convert from Kelvin to Fahrenheit
+			return Math.round((1.8 * (degK - 273)) + 32);
+		}
+
+		$scope.convertToDate = function(dt) {
+			return new Date(dt * 1000);
+		}
+
 		console.log($scope.weatherResult);
+
 
 	}
 ]);
