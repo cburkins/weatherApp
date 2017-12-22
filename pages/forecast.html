@@ -3,7 +3,10 @@ Here's the current forecast for the zip code: {{zipCode}}
 
 <div ng-repeat="w in weatherResult.list">
 	<div class="row">
-		<div class="col-md-12">		
+		<div class="col-md-12">	
+
+
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title"> {{ convertToDate(w.dt) | date: 'MMM, d, y' }} </h3>
@@ -12,6 +15,8 @@ Here's the current forecast for the zip code: {{zipCode}}
 					Daytime temperature: {{ convertToFahrenheit(w.temp.day) }}
 				</div>
 			</div>
+
+
 
 		</div>
 	</div>	
