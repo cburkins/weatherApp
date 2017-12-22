@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<!-- dateFormat is a string that was passed into the custom directive -->
+		<!-- weatherDay is an object (two-way binding) that was passed into the custom directive -->
+		<!-- convertToDate: function that was passed, expects a named argument -->
+		<!--                We also have to provide object map, which names the input arguments according to the directive declaration in directives.js -->
+		<!-- 				dt: the argument name defined, and weatherDay.dt is the argument that we'll pass in, -->
+		<!--                        in this case weatherDay.dt, which is a named property within the passed-in weatherDay object -->
+		<h3 class="panel-title">{{dateLabel}}:  {{    convertToDate({ dt: weatherDay.dt }) | date: dateFormatArg2     }}   {{ dateFooter }}</h3>
+	</div>
+	<div class="panel-body">
+		<!-- convertToStandard is a function that was passed into custom directive -->
+		<!-- daytimeTemp is a object map, in other words, a named argument to the given function -->
+		Daytime temperature: {{ convertToStandard({ daytimeTemp: weatherDay.temp.day }) }}
+	</div>
+</div>

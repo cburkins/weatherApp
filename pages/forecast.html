@@ -7,16 +7,22 @@ Here's the current forecast for the zip code: {{zipCode}}
 
 
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"> {{ convertToDate(w.dt) | date: 'MMM, d, y' }} </h3>
-				</div>
-				<div class="panel-body">
-					Daytime temperature: {{ convertToFahrenheit(w.temp.day) }}
-				</div>
-			</div>
-
-
+			<!-- Use a custom directive -->
+			<!-- NOTE: argument to a passed function doesn't have to match function declaration, it's purely positional -->
+			<!-- weather-day: directive expects two-way binding, passing in string "w", which Angular directive expects to be the name of an object 
+			                  and is the object obtained from the ng-repeat above -->
+			<!-- convert-to-standard: we're passing in a function, and identifying the name of 1st (all) position parameter as "daytimeTemp" -->
+			<!-- convert-to-standard: we're passing in a function, and identifying the name of 1st (all) position parameter as "daytimeTemp" -->
+			<!-- date-format: passing in a string -->
+			<!-- NOTE: Date format options are "MMM d, y" or "MMMM d, y" -->
+			<weather-report 
+				weather-day="w" 
+				convert-to-standard="convertToFahrenheit(daytimeTemp)" 
+				convert-to-date="convertToDate(dt)"
+				date-format="MMMM d, y"
+				date-label="The Date"
+				date-footer="[[[Zip code is {{zipCode}}]]]">
+			</weather-report>
 
 		</div>
 	</div>	

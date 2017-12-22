@@ -32,6 +32,8 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$sce', 'zip
 			APPID: "cbf71841c266028edf05411b46d61152"
 		});
 
+		$scope.variableA = "(this is variable A)"
+
 		$scope.convertToFahrenheit = function(degK) {
 			// Convert from Kelvin to Fahrenheit
 			return Math.round((1.8 * (degK - 273)) + 32);

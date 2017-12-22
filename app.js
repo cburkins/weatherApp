@@ -4,5 +4,3 @@ var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
 
 var dateNow = Date.now();
 
-
-
